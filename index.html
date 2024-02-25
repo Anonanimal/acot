@@ -102,7 +102,6 @@
         <div>
             <label for="artifactCategory">Artifact Category:</label>
             <select id="artifactCategory" name="artifactCategory">
-                <option value="">Select Category</option>
                 <option value="character">Character Artifact</option>
                 <option value="court">Courtroom Artifact</option>
             </select>
@@ -142,7 +141,7 @@
             const types = window.artifactConfig.types[category]?.types || {};
             populateDropdown('type', Object.keys(types));
             handleTypeChange(category, types);
-            document.getElementById('type').style.display = 'block'; // Show the type dropdown
+            document.getElementById('typeContainer').style.display = 'block'; // Show the type dropdown
             document.getElementById('type').onchange = () => handleTypeChange(category, types); // Set up the handler for type change
         }
         
@@ -151,7 +150,7 @@
             const type = typeSelect.value;
             const visuals = types[type];
             populateDropdown('visuals', visuals);
-            document.getElementById('visuals').style.display = 'block'; // Show the visuals dropdown
+            document.getElementById('visualsContainer').style.display = 'block'; // Show the visuals dropdown
         }
         
         // Reuse the populateDropdown function but ensure it clears existing options first
