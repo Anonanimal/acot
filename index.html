@@ -56,17 +56,8 @@
               populateDropdown('quality', data.qualities);
               populateDropdown('baseTemplate', data.templates);
               window.artifactConfig = data;
-          })
-          .catch(error => console.error('Error loading configuration:', error));
-            // Event listener for the artifact category change
-            document.getElementById('artifactCategory').addEventListener('change', function() {
-                const category = this.value;
-                if (category) {
-                    showAndPopulateConditionalInputs(category);
-                } else {
-                    document.getElementById('conditionalInputs').style.display = 'none';
-                }
-            });
+              document.getElementById('artifactCategory').addEventListener('change', handleCategoryChange);
+          });
         }
         
         function handleCategoryChange() {
