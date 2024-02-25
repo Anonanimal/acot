@@ -29,7 +29,6 @@
         <div>
             <label for="artifactCategory">Artifact Category:</label>
             <select id="artifactCategory" name="artifactCategory">
-                <option value="">Select Category</option>
                 <option value="character">Character Artifact</option>
                 <option value="court">Courtroom Artifact</option>
             </select>
@@ -57,6 +56,7 @@
               populateDropdown('baseTemplate', data.templates);
               window.artifactConfig = data;
               document.getElementById('artifactCategory').addEventListener('change', handleCategoryChange);
+              handleCategoryChange();
           });
         }
         
@@ -64,7 +64,7 @@
             const category = this.value;
             const types = window.artifactConfig.types[category]?.types || {};
             populateDropdown('type', Object.keys(types));
-            populateDropdown('visuals', types[Object.keys(types)[0]]);
+            handleTypeChange(this.value, types);
             document.getElementById('type').style.display = 'block'; // Show the type dropdown
             document.getElementById('type').onchange = () => handleTypeChange(category, types); // Set up the handler for type change
         }
