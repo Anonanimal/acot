@@ -14,7 +14,7 @@ agot_create_artifact_$ARTIFACT_NAME = {
 		modifier = $ARTIFACT_MODIFIER
 		save_scope_as = newly_created_artifact
 		decaying = yes
-    history = {
-    }
+		history = {
+		}
 	}
 }
