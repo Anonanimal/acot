@@ -22,24 +22,31 @@
             </select>
         </div>
         <div>
-            <label for="visuals">Visuals</label>
-            <select id="visuals" name="visuals">
-            </select>
-        </div>
-        <div>
-            <label for="type">Type</label>
-            <select id="type" name="type">
-            </select>
-        </div>
-        <div>
             <label for="baseTemplate">Base Template</label>
             <select id="baseTemplate" name="baseTemplate">
             </select>
         </div>
-        <button type="button" onclick="generateCode()">Generate Code</button>
+        <div>
+            <label for="artifactCategory">Artifact Category:</label>
+            <select id="artifactCategory" name="artifactCategory">
+                <option value="">Select Category</option>
+                <option value="character">Character Artifact</option>
+                <option value="court">Courtroom Artifact</option>
+            </select>
+        </div>
+        <div>
+            <label for="type">Type:</label>
+            <select id="type" name="type" style="display: none;">
+                <!-- Options will be populated based on category selection -->
+            </select>
+        </div>
+        <div>
+            <label for="visuals">Visuals:</label>
+            <select id="visuals" name="visuals" style="display: none;">
+                <!-- Options will be populated based on type selection -->
+            </select>
+        </div>
     </form>
-    <h2>Generated Code:</h2>
-    <pre id="generatedCode"></pre>
 
     <script>
       function loadConfiguration() {
@@ -47,22 +54,47 @@
           .then(response => response.json())
           .then(data => {
               populateDropdown('quality', data.qualities);
-              populateDropdown('visuals', data.court_visuals);
-              populateDropdown('type', data.court_types);
               populateDropdown('baseTemplate', data.templates);
+              window.artifactConfig = data;
           })
           .catch(error => console.error('Error loading configuration:', error));
-      }
-      
-      // Helper function to populate a dropdown
-      function populateDropdown(dropdownId, options) {
-          const select = document.getElementById(dropdownId);
-          options.forEach(option => {
-              const opt = document.createElement('option');
-              opt.value = opt.textContent = option;
-              select.appendChild(opt);
-          });
-      }
+            // Event listener for the artifact category change
+            document.getElementById('artifactCategory').addEventListener('change', function() {
+                const category = this.value;
+                if (category) {
+                    showAndPopulateConditionalInputs(category);
+                } else {
+                    document.getElementById('conditionalInputs').style.display = 'none';
+                }
+            });
+        }
+        
+        function handleCategoryChange() {
+            const category = this.value;
+            const types = window.artifactConfig.types[category]?.types || {};
+            populateDropdown('type', Object.keys(types));
+            document.getElementById('type').style.display = 'block'; // Show the type dropdown
+            document.getElementById('type').onchange = () => handleTypeChange(category, types); // Set up the handler for type change
+        }
+        
+        function handleTypeChange(category, types) {
+            const typeSelect = document.getElementById('type');
+            const type = typeSelect.value;
+            const visuals = types[type];
+            populateDropdown('visuals', visuals);
+            document.getElementById('visuals').style.display = 'block'; // Show the visuals dropdown
+        }
+        
+        // Reuse the populateDropdown function but ensure it clears existing options first
+        function populateDropdown(dropdownId, options) {
+            const select = document.getElementById(dropdownId);
+            select.innerHTML = ''; // Clear existing options
+            options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = opt.textContent = option;
+                select.appendChild(opt);
+            });
+        }
       
       // Call loadConfiguration when the page loads
       document.addEventListener('DOMContentLoaded', loadConfiguration);
