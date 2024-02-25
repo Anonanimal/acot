@@ -1,0 +1,20 @@
+agot_create_artifact_$ARTIFACT_NAME = {
+	$OWNER$ = {
+		save_scope_as = owner
+	}
+	set_artifact_rarity_$ARTIFACT_QUALITY = yes
+	create_artifact = {
+		name = $ARTIFACT_NAME_LOC
+		visuals = $ARTIFACT_NAME
+		description = $ARTIFACT_DESC_LOC
+		type = $ARTIFACT_TYPE
+		wealth = scope:wealth
+		quality = scope:quality
+		template = $ARTIFACT_TEMPLATE
+		modifier = $ARTIFACT_MODIFIER
+		save_scope_as = newly_created_artifact
+		decaying = yes
+    history = {
+    }
+	}
+}
