@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CK3 Artifact Creator</title>
+    <style>
+        #gameCode {
+            background-color: #f0f0f0;
+            font-family: monospace;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>CK3 Artifact Creator</h1>
@@ -48,6 +56,8 @@
         </div>
     </form>
 
+    <textarea id="gameCode" rows="10" cols="50" readonly></textarea>
+
     <script>
       function loadConfiguration() {
           fetch('config.json') // Adjust the path if your file is in a folder
@@ -88,6 +98,30 @@
                 select.appendChild(opt);
             });
         }
+
+        function generateGameCode() {      
+            const codeString = `Test`;
+        
+            // Update the textarea with the game code
+            updateGameCode(codeString);
+        }
+
+        document.getElementById('gameCode').addEventListener('click', function(event) {
+            // Prevent default action to ensure the textarea gets selected
+            event.preventDefault();
+        
+            // Select the text area's content
+            this.select();
+        
+            // Copy the selected text to the clipboard
+            navigator.clipboard.writeText(this.value)
+                .then(() => {
+                    console.log('Text copied to clipboard successfully.');
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+        });
       
       // Call loadConfiguration when the page loads
       document.addEventListener('DOMContentLoaded', loadConfiguration);
