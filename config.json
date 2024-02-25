@@ -1,75 +1,4 @@
 {
-  "character_visuals": [
-    "regalia",
-    "crown",
-    "armor",
-    "brooch",
-    "necklace",
-    "ring",
-    "flowers",
-    "pelt",
-    "bone",
-    "medallion",
-    "cabinet_trinket",
-    "fabric_roll",
-    "pocket_figurine",
-    "pocket_pouch",
-    "pocket_goblet",
-    "pocket_basic_case",
-    "pocket_fancy_case",
-    "cheese",
-    "pocket_book"
-  ],
-  "court_visuals": [
-    "chest",
-    "diwan",
-    "table",
-    "cabinet",
-    "throne",
-    "tapestry",
-    "small_animal_hide",
-    "large_animal_hide",
-    "small_box",
-    "medium_box",
-    "goblet",
-    "banner",
-    "wall_shield",
-    "wall_shield_medi",
-    "animal_trophy",
-    "statue",
-    "statue_mena",
-    "scroll",
-    "pouch",
-    "urn",
-    "indian_book",
-    "book",
-    "reliquary",
-    "cross",
-    "rock",
-    "human_skull",
-    "diamond",
-    "riches",
-    "flask",
-    "axe_court",
-    "hammer_court",
-    "spear_court",
-    "mace_court",
-    "dagger_court",
-    "sword_court",
-    "regalia_court",
-    "crown_court",
-    "armor_court",
-    "tiny_throne_trinket",
-    "brooch_court",
-    "ring_court",
-    "necklace_court",
-    "skull_goblet",
-    "oxus_bracelet",
-    "persian_drinking_vessel",
-    "sassanian_sword_pedestal",
-    "sassanian_sword",
-    "fp3_incense_burner_sculpture"
-  ],
   "modifiers": [
     "diplomacy",
     "martial",
@@ -244,25 +173,101 @@
     "famed",
     "illustrious"
   ],
-  "court_types": [
-    "chest",
-    "pedestal",
-    "wall_small",
-    "wall_big",
-    "throne",
-    "book"
-  ],
-  "character_types": [
-    "helmet",
-    "regalia",
-    "armor",
-    "primary_armament",
-    "miscellaneous",
-    "bow"
-  ],
   "templates": [
     "general_unique_template",
     "child_toy_template",
     "adults_only_template"
-  ]
+  ],
+  "types": {
+    "character": {
+      "types": {
+        "helmet": ["crown"],
+        "regalia": ["regalia"],
+        "armor": ["armor"],
+        "primary_armament": [],
+        "miscellaneous": [
+          "brooch",
+          "necklace",
+          "ring",
+          "flowers",
+          "pelt",
+          "bone",
+          "medallion",
+          "cabinet_trinket",
+          "fabric_roll",
+          "pocket_figurine",
+          "pocket_pouch",
+          "pocket_goblet",
+          "pocket_basic_case",
+          "pocket_fancy_case",
+          "cheese",
+          "pocket_book"
+        ],
+        "bow": []
+      }
+    },
+    "court": {
+      "types": {
+        "chest": [
+          "chest",
+          "diwan",
+          "table",
+          "cabinet"
+        ],
+        "pedestal": [
+          "small_box",
+          "medium_box",
+          "goblet",
+          "statue_mena",
+          "scroll",
+          "pouch",
+          "urn",
+          "reliquary",
+          "rock",
+          "human_skull",
+          "diamond",
+          "riches",
+          "flask",
+          "axe_court",
+          "hammer_court",
+          "spear_court",
+          "mace_court",
+          "dagger_court",
+          "sword_court",
+          "regalia_court",
+          "crown_court",
+          "armor_court",
+          "tiny_throne_trinket",
+          "brooch_court",
+          "ring_court",
+          "necklace_court",
+          "skull_goblet",
+          "oxus_bracelet",
+          "persian_drinking_vessel",
+          "sassanian_sword_pedestal",
+          "fp3_incense_burner_sculpture"
+        ],
+        "wall_small": [
+          "small_animal_hide",
+          "wall_shield",
+          "animal_trophy"
+        ],
+        "wall_big": [
+          "tapestry",
+          "large_animal_hide",
+          "banner",
+          "wall_shield_medi"
+        ],
+        "throne": [
+          "throne"
+        ],
+        "sculpture": [
+          "statue"
+        ],
+        "book": [
+          "book"
+        ]
+      }
+    }
+  }
 }
