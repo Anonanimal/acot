@@ -61,10 +61,10 @@
         }
         
         function handleCategoryChange() {
-            const category = this.value;
+            const category = this.value | 'character';
             const types = window.artifactConfig.types[category]?.types || {};
             populateDropdown('type', Object.keys(types));
-            handleTypeChange(this.value, types);
+            handleTypeChange(category, types);
             document.getElementById('type').style.display = 'block'; // Show the type dropdown
             document.getElementById('type').onchange = () => handleTypeChange(category, types); // Set up the handler for type change
         }
