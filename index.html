@@ -11,26 +11,90 @@
             border: 1px solid #ccc;
             padding: 10px;
         }
+
+        /* General form styling */
+        #modForm {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        #modForm div {
+            margin-bottom: 15px;
+        }
+        
+        #modForm label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        /* Style inputs, textareas, and selects */
+        #modForm input[type="text"],
+        #modForm textarea,
+        #modForm select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Make sure padding does not affect the total width */
+            margin-bottom: 10px; /* Add some space below the input */
+        }
+        
+        #modForm input[type="text"]:focus,
+        #modForm textarea:focus,
+        #modForm select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+        }
+        
+        /* Style the submit button */
+        #modForm button {
+            width: auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        #modForm button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Adjust visibility for dynamically shown elements */
+        #modForm select[style*="display: none;"],
+        #modForm label[for="type"][style*="display: none;"],
+        #modForm label[for="visuals"][style*="display: none;"] {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
     <h1>CK3 Artifact Creator</h1>
     <form id="modForm">
         <div>
-            <label for="name">Name</label>
+            <label for="name">Name:</label>
             <input type="text" id="name" name="name">
         </div>
         <div>
-            <label for="description">Description</label>
+            <label for="description">Description:</label>
             <textarea id="description" name="description"></textarea>
         </div>
         <div>
-            <label for="quality">Quality</label>
+            <label for="quality">Quality:</label>
             <select id="quality" name="quality">
             </select>
         </div>
         <div>
-            <label for="baseTemplate">Template</label>
+            <label for="baseTemplate">Template:</label>
             <select id="baseTemplate" name="baseTemplate">
                 <option value="none">None</option>
             </select>
@@ -38,22 +102,24 @@
         <div>
             <label for="artifactCategory">Artifact Category:</label>
             <select id="artifactCategory" name="artifactCategory">
+                <option value="">Select Category</option>
                 <option value="character">Character Artifact</option>
                 <option value="court">Courtroom Artifact</option>
             </select>
         </div>
-        <div>
+        <div id="typeContainer" style="display: none;">
             <label for="type">Type:</label>
-            <select id="type" name="type" style="display: none;">
+            <select id="type" name="type">
                 <!-- Options will be populated based on category selection -->
             </select>
         </div>
-        <div>
+        <div id="visualsContainer" style="display: none;">
             <label for="visuals">Visuals:</label>
-            <select id="visuals" name="visuals" style="display: none;">
+            <select id="visuals" name="visuals">
                 <!-- Options will be populated based on type selection -->
             </select>
         </div>
+        <button type="button" onclick="generateCode()">Generate Code</button>
     </form>
 
     <textarea id="gameCode" rows="10" cols="50" class="gamecode" readonly></textarea>
