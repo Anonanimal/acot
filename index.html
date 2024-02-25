@@ -47,8 +47,8 @@
           .then(response => response.json())
           .then(data => {
               populateDropdown('quality', data.qualities);
-              populateDropdown('visuals', data.court-visuals);
-              populateDropdown('type', data.court-types);
+              populateDropdown('visuals', data.court_visuals);
+              populateDropdown('type', data.court_types);
               populateDropdown('baseTemplate', data.templates);
           })
           .catch(error => console.error('Error loading configuration:', error));
