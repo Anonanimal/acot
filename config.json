@@ -184,7 +184,15 @@
         "helmet": ["crown"],
         "regalia": ["regalia"],
         "armor": ["armor"],
-        "primary_armament": [],
+        "primary_armament": [
+          "axe",
+          "hammer",
+          "mace",
+          "spear",
+          "dagger",
+          "sword",
+          "longsword"
+        ],
         "miscellaneous": [
           "brooch",
           "necklace",
@@ -203,7 +211,12 @@
           "cheese",
           "pocket_book"
         ],
-        "bow": []
+        "bow": [
+          "longbow",
+          "composite",
+          "bow",
+          "crossbow"
+        ]
       }
     },
     "court": {
