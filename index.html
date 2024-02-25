@@ -1,1 +1,71 @@
-Test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CK3 Mod Tool</title>
+</head>
+<body>
+    <h1>Crusader Kings 3 Mod Generator</h1>
+    <form id="modForm">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+        </div>
+        <div>
+            <label for="quality">Quality</label>
+            <select id="quality" name="quality">
+            </select>
+        </div>
+        <div>
+            <label for="visuals">Visuals</label>
+            <select id="visuals" name="visuals">
+            </select>
+        </div>
+        <div>
+            <label for="type">Type</label>
+            <select id="type" name="type">
+            </select>
+        </div>
+        <div>
+            <label for="baseTemplate">Base Template</label>
+            <select id="baseTemplate" name="baseTemplate">
+            </select>
+        </div>
+        <button type="button" onclick="generateCode()">Generate Code</button>
+    </form>
+    <h2>Generated Code:</h2>
+    <pre id="generatedCode"></pre>
+
+    <script>
+      function loadConfiguration() {
+          fetch('config.json') // Adjust the path if your file is in a folder
+          .then(response => response.json())
+          .then(data => {
+              populateDropdown('quality', data.qualities);
+              populateDropdown('visuals', data.court-visuals);
+              populateDropdown('type', data.court-types);
+              populateDropdown('baseTemplate', data.templates);
+          })
+          .catch(error => console.error('Error loading configuration:', error));
+      }
+      
+      // Helper function to populate a dropdown
+      function populateDropdown(dropdownId, options) {
+          const select = document.getElementById(dropdownId);
+          options.forEach(option => {
+              const opt = document.createElement('option');
+              opt.value = opt.textContent = option;
+              select.appendChild(opt);
+          });
+      }
+      
+      // Call loadConfiguration when the page loads
+      document.addEventListener('DOMContentLoaded', loadConfiguration);
+    </script>
+  </body>
+</html>
