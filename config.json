@@ -1,5 +1,5 @@
 {
-  "character-visuals": [
+  "character_visuals": [
     "regalia",
     "crown",
     "armor",
@@ -20,7 +20,7 @@
     "cheese",
     "pocket_book"
   ],
-  "court-visuals": [
+  "court_visuals": [
     "chest",
     "diwan",
     "table",
@@ -244,7 +244,7 @@
     "famed",
     "illustrious"
   ],
-  "court-types": [
+  "court_types": [
     "chest",
     "pedestal",
     "wall_small",
@@ -252,7 +252,7 @@
     "throne",
     "book"
   ],
-  "character-types": [
+  "character_types": [
     "helmet",
     "regalia",
     "armor",
