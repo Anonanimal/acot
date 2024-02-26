@@ -75,30 +75,30 @@
         #modForm label[for="visuals"][style*="display: none;"] {
             display: none !important;
         }
-
+        
         .content-wrapper {
             display: flex;
-            flex-wrap: nowrap; /* Prevent flex items from wrapping */
-            justify-content: space-between; /* Distribute space between form and cards */
+            flex-wrap: nowrap; /* Ensure items are laid out in a single row */
+            justify-content: space-between; /* Distribute space between items */
             align-items: flex-start; /* Align items at the top */
             gap: 20px; /* Space between the form and cards container */
         }
         
         .form-container {
-            flex: 1; /* Allow the form to grow but with a limit */
-            max-width: 50%; /* Limit the form's maximum width to half of the parent container */
+            flex: 2; /* Increase the form's flex grow factor */
+            min-width: 300px; /* Minimum width to prevent it from becoming too narrow */
+            max-width: 60%; /* Optionally increase the maximum width */
         }
         
         .cards-container {
-            flex: 1; /* Allow the container to grow */
+            flex: 1; /* Keep the cards container flexible */
             display: flex;
             flex-direction: column; /* Stack cards vertically */
             gap: 10px; /* Space between cards */
             overflow-y: auto; /* Enable vertical scrolling */
             overflow-x: hidden; /* Hide horizontal scrollbar */
             max-height: 600px; /* Maximum height before scrolling */
-            width: 50%; /* Set a definitive width to balance with the form */
-            min-width: 300px; /* Ensure it doesn't get too narrow */
+            min-width: 300px; /* Minimum width for the cards container */
             padding: 10px; /* Padding inside the cards container */
             border: 1px solid #ccc; /* Optional border for visual structure */
             border-radius: 5px; /* Optional border radius for aesthetics */
@@ -113,7 +113,6 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
     </style>
 </head>
 <body>
