@@ -235,6 +235,8 @@
     <textarea id="gameCode" rows="10" cols="50" class="gamecode" readonly></textarea>
 
     <script>
+      var config;
+        
       function loadConfiguration() {
           fetch('config.json') // Adjust the path if your file is in a folder
           .then(response => response.json())
@@ -242,6 +244,7 @@
               populateDropdown('quality', data.qualities);
               populateDropdown('baseTemplate', data.templates);
               window.artifactConfig = data;
+              config = data;
               document.getElementById('artifactCategory').addEventListener('change', handleCategoryChange);
               handleCategoryChange();
           });
@@ -409,7 +412,6 @@
         
         // Function to add a new modifier input field
         function addModifierInput() {
-            var mods = ["Speed", "Strength", "Agility", "Wisdom"];
             const container = document.getElementById('modifiersList');
             const inputGroup = document.createElement('div');
             inputGroup.className = 'modifier-input-group';
@@ -428,7 +430,7 @@
             container.appendChild(inputGroup);
 
             const modifierNameInput = inputGroup.querySelector('.modifier-name');
-            autocomplete(modifierNameInput, mods); // Assume `modifierNames` is your array of suggestions
+            autocomplete(modifierNameInput, config.modifiers); // Assume `modifierNames` is your array of suggestions
         
             inputGroup.querySelector('.remove-modifier').addEventListener('click', function() {
                 inputGroup.remove();
