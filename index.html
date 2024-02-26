@@ -372,7 +372,7 @@
                 );
 
                 filteredSuggestions.concat(allSuggestions.filter(suggestion =>
-                    !filteredSuggestions.contains(suggestion) && suggestion.toLowerCase().includes(currentInput.toLowerCase())
+                    !filteredSuggestions.includes(suggestion) && suggestion.toLowerCase().includes(currentInput.toLowerCase())
                 ));
         
                 displaySuggestions(filteredSuggestions, this);
