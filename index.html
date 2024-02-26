@@ -126,6 +126,24 @@
         .card strong {
             color: #333; /* Slightly darker color for emphasis */
         }
+
+        .delete-button {
+            cursor: pointer;
+            background-color: #ff4545; /* Red color for the delete button */
+            color: white;
+            border: none;
+            border-radius: 50%; /* Circular button */
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            line-height: 12px; /* Adjust line height to vertically center the 'X' */
+            text-align: center;
+            padding: 0;
+        }
+        
+        .delete-button:hover {
+            background-color: #ff0000; /* Darker red on hover for visual feedback */
+        }
     </style>
 </head>
 <body>
@@ -230,7 +248,7 @@
             const container = document.querySelector('.cards-container');
             const card = document.createElement('div');
             card.className = 'card';
-            
+        
             // Determine the color based on the artifact's quality
             let color;
             switch (artifact.quality) {
@@ -250,15 +268,25 @@
                     color = "black"; // Default color if no match
             }
         
-            // Use the color in the style for the artifact's name
+            // Adding a delete button to the card
             card.innerHTML = `
-                <h3 style="color: ${color};">${artifact.name}</h3>
+                <div style="position: relative;">
+                    <button class="delete-button" style="position: absolute; top: 0; right: 0;">X</button>
+                    <h3 style="color: ${color};">${artifact.name}</h3>
+                </div>
                 <p><strong>Type:</strong> ${artifact.type}</p>
                 <p><strong>Visual:</strong> ${artifact.visual}</p>
                 <p>${artifact.description}</p>
             `;
+        
+            // Add event listener to the delete button
+            card.querySelector('.delete-button').addEventListener('click', function() {
+                card.remove();
+            });
+        
             container.appendChild(card);
         }
+
 
         generateGameCode();
         
