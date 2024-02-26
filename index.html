@@ -78,25 +78,33 @@
 
         .content-wrapper {
             display: flex;
-            justify-content: flex-start; /* Align children to the start of the container */
-            align-items: flex-start; /* Align items to the top */
-            gap: 20px; /* Add some space between the form and the cards */
+            justify-content: flex-start; /* Align children at the start of the container */
+            align-items: flex-start; /* Align items at the top */
+            gap: 20px; /* Space between the form and cards container */
         }
         
         .form-container {
-            /* Your existing styles, without the margin auto */
-            margin: 20px 20px 20px 0; /* Adjusted margin */
+            /* Adjust the flex property to allow the form to grow and take up half the space */
+            flex: 1;
+            min-width: 300px; /* Minimum width to prevent squishing */
         }
         
         .cards-container {
+            flex: 1; /* Allow the cards container to grow and take up available space */
             display: flex;
-            flex-wrap: wrap; /* Allow cards to wrap to the next line */
+            flex-direction: column; /* Stack cards vertically */
             gap: 10px; /* Space between cards */
-            max-width: calc(100% - 620px); /* Adjust based on the form width and gap */
+            max-height: 600px; /* Maximum height before scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 10px; /* Padding inside the cards container */
+            border: 1px solid #ccc; /* Optional border for visual structure */
+            border-radius: 5px; /* Optional border radius for aesthetics */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
         }
         
         .card {
-            width: 200px; /* Fixed card width */
+            /* Card styles remain the same */
+            width: 100%; /* Card width to fill the container */
             padding: 10px;
             background-color: #fff;
             border: 1px solid #ccc;
