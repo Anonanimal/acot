@@ -508,6 +508,7 @@
             const type = document.getElementById('type').value; 
             const visual = document.getElementById('visuals').value; 
             const template = document.getElementById('baseTemplate').value;
+            const modifiers = collectModifiers();
         
             // Create an artifact object
             const artifact = {
@@ -516,7 +517,8 @@
                 quality: quality,
                 type: type,
                 visual: visual,
-                template: template
+                template: template,
+                modifiers: modifiers
             };
         
             // Add the artifact card to the list
