@@ -226,7 +226,7 @@
                 </div>
                 <button type="button" id="addModifier">Add Modifier</button>
             </div>
-            <button id="generateCodeButton" type="submit">Create Artifact</button>
+            <button id="generateCodeButton" type="button">Create Artifact</button>
         </form>
         <div class="cards-container">
             <!-- Placeholder for dynamically added cards -->
@@ -505,6 +505,12 @@
         });
 
         document.getElementById('generateCodeButton').addEventListener('click', function() {
+            const form = document.getElementById('modForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
             // Gather input values from the form
             const name = document.getElementById('name').value;
             const description = document.getElementById('description').value;
