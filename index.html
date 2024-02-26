@@ -144,6 +144,21 @@
         .delete-button:hover {
             background-color: #ff0000; /* Darker red on hover for visual feedback */
         }
+
+        #modifiersList .modifier-input-group {
+            margin-bottom: 10px;
+        }
+        
+        .modifier-name, .modifier-value {
+            margin-right: 5px;
+        }
+        
+        .remove-modifier {
+            background-color: #ff4545;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -187,6 +202,13 @@
                 <select id="visuals" name="visuals">
                     <!-- Options will be populated based on type selection -->
                 </select>
+            </div>
+            <div id="modifiersContainer">
+                <label for="modifiers">Modifiers:</label>
+                <div id="modifiersList">
+                    <!-- Modifier inputs will be added here dynamically -->
+                </div>
+                <button type="button" id="addModifier">Add Modifier</button>
             </div>
             <button type="button" id="generateCodeButton">Add Card</button>
         </form>
@@ -305,6 +327,47 @@
             container.appendChild(card);
         }
 
+        // Array of modifier names for the autocomplete
+        const modifierNames = ["Speed", "Strength", "Agility", "Wisdom"];
+        
+        // Function to add a new modifier input field
+        function addModifierInput() {
+            const container = document.getElementById('modifiersList');
+            const inputGroup = document.createElement('div');
+            inputGroup.className = 'modifier-input-group';
+        
+            inputGroup.innerHTML = `
+                <input type="text" class="modifier-name" placeholder="Modifier name">
+                <input type="number" class="modifier-value" placeholder="Value" step="0.01">
+                <button type="button" class="remove-modifier">Remove</button>
+            `;
+        
+            // Initialize autocomplete/typeahead for the modifier name input
+            // If using jQuery UI Autocomplete, it would look something like this:
+            // $(inputGroup).find('.modifier-name').autocomplete({ source: modifierNames });
+        
+            // Add event listener for the remove button
+            inputGroup.querySelector('.remove-modifier').addEventListener('click', function() {
+                inputGroup.remove();
+            });
+        
+            container.appendChild(inputGroup);
+        }
+
+        function collectModifiers() {
+            const modifiers = [];
+            document.querySelectorAll('.modifier-input-group').forEach(group => {
+                const name = group.querySelector('.modifier-name').value;
+                const value = group.querySelector('.modifier-value').valueAsNumber; // Use valueAsNumber for numeric inputs
+                if (name && !isNaN(value)) { // Check if both name and value are provided
+                    modifiers.push({name, value});
+                }
+            });
+            return modifiers;
+        }
+
+        // Initial setup
+        document.getElementById('addModifier').addEventListener('click', addModifierInput);
 
         generateGameCode();
         
