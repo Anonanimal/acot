@@ -371,7 +371,7 @@
                     suggestion.toLowerCase().startsWith(currentInput.toLowerCase())
                 );
 
-                filteredSuggestions.concat(allSuggestions.filter(suggestion =>
+                filteredSuggestions = filteredSuggestions.concat(allSuggestions.filter(suggestion =>
                     !filteredSuggestions.includes(suggestion) && suggestion.toLowerCase().includes(currentInput.toLowerCase())
                 ));
         
