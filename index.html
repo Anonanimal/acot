@@ -348,7 +348,7 @@
                 const currentInput = this.value;
         
                 // Clear previous suggestions
-                let existingSuggestions = document.querySelector('.autocomplete-suggestions');
+                let existingSuggestions = input.parentNode.querySelector('.autocomplete-suggestions');
                 if (existingSuggestions) {
                     existingSuggestions.remove();
                 }
@@ -376,7 +376,8 @@
                     suggestionsContainer.appendChild(suggestionElement);
                 });
         
-                input.parentNode.appendChild(suggestionsContainer);
+                // Insert the suggestions container right after the input field
+                input.parentNode.insertBefore(suggestionsContainer, input.nextSibling);
             });
         }
         
