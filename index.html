@@ -244,10 +244,22 @@
             document.getElementById('gameCode').value = codeString;
         }
 
+        function toTitleCase(str) {
+          return str.replace(
+            /\w\S*/g,
+            function(txt) {
+              return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+          );
+        }
+
         function addArtifactCard(artifact) {
             const container = document.querySelector('.cards-container');
             const card = document.createElement('div');
             card.className = 'card';
+
+            // Convert the artifact object to a JSON string and store it in a data attribute
+            card.setAttribute('data-artifact', JSON.stringify(artifact));
         
             // Determine the color based on the artifact's quality
             let color;
@@ -267,15 +279,18 @@
                 default:
                     color = "black"; // Default color if no match
             }
-        
+
+            var type = toTitleCase(artifact.type.replaceAll("_", " "));
+            var visual = toTitleCase(artifact.visual.replaceAll("_", " "));
+            
             // Adding a delete button to the card
             card.innerHTML = `
                 <div style="position: relative;">
                     <button class="delete-button" style="position: absolute; top: 0; right: 0;">X</button>
                     <h3 style="color: ${color};">${artifact.name}</h3>
                 </div>
-                <p><strong>Type:</strong> ${artifact.type}</p>
-                <p><strong>Visual:</strong> ${artifact.visual}</p>
+                <p><strong>Type:</strong> ${type}</p>
+                <p><strong>Visual:</strong> ${visual}</p>
                 <p>${artifact.description}</p>
             `;
         
