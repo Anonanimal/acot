@@ -350,8 +350,9 @@
             const name = document.getElementById('name').value;
             const description = document.getElementById('description').value;
             const quality = document.getElementById('quality').value;
-            const type = document.getElementById('type').value; // Make sure this is shown and populated
-            const visual = document.getElementById('visuals').value; // Make sure this is shown and populated
+            const type = document.getElementById('type').value; 
+            const visual = document.getElementById('visuals').value; 
+            const template = document.getElementById('template').value;
         
             // Create an artifact object
             const artifact = {
@@ -359,7 +360,8 @@
                 description: description,
                 quality: quality,
                 type: type,
-                visual: visual
+                visual: visual,
+                template: template
             };
         
             // Add the artifact card to the list
