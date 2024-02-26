@@ -78,24 +78,27 @@
 
         .content-wrapper {
             display: flex;
-            justify-content: flex-start; /* Align children at the start of the container */
+            flex-wrap: nowrap; /* Prevent flex items from wrapping */
+            justify-content: space-between; /* Distribute space between form and cards */
             align-items: flex-start; /* Align items at the top */
             gap: 20px; /* Space between the form and cards container */
         }
         
         .form-container {
-            /* Adjust the flex property to allow the form to grow and take up half the space */
-            flex: 1;
-            min-width: 300px; /* Minimum width to prevent squishing */
+            flex: 1; /* Allow the form to grow but with a limit */
+            max-width: 50%; /* Limit the form's maximum width to half of the parent container */
         }
         
         .cards-container {
-            flex: 1; /* Allow the cards container to grow and take up available space */
+            flex: 1; /* Allow the container to grow */
             display: flex;
             flex-direction: column; /* Stack cards vertically */
             gap: 10px; /* Space between cards */
-            max-height: 600px; /* Maximum height before scrolling */
             overflow-y: auto; /* Enable vertical scrolling */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            max-height: 600px; /* Maximum height before scrolling */
+            width: 50%; /* Set a definitive width to balance with the form */
+            min-width: 300px; /* Ensure it doesn't get too narrow */
             padding: 10px; /* Padding inside the cards container */
             border: 1px solid #ccc; /* Optional border for visual structure */
             border-radius: 5px; /* Optional border radius for aesthetics */
@@ -103,14 +106,14 @@
         }
         
         .card {
-            /* Card styles remain the same */
-            width: 100%; /* Card width to fill the container */
+            width: calc(100% - 20px); /* Adjust width to account for padding */
             padding: 10px;
             background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
     </style>
 </head>
 <body>
