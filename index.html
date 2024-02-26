@@ -188,7 +188,7 @@
                     <!-- Options will be populated based on type selection -->
                 </select>
             </div>
-            <button type="button" onclick="generateCode()">Generate Code</button>
+            <button type="button" id="generateCodeButton">Add Card</button>
         </form>
         <div class="cards-container">
             <!-- Placeholder for dynamically added cards -->
@@ -328,6 +328,30 @@
                 .catch(err => {
                     console.error('Failed to copy text: ', err);
                 });
+        });
+
+        document.getElementById('generateCodeButton').addEventListener('click', function() {
+            // Gather input values from the form
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const quality = document.getElementById('quality').value;
+            const type = document.getElementById('type').value; // Make sure this is shown and populated
+            const visual = document.getElementById('visuals').value; // Make sure this is shown and populated
+        
+            // Create an artifact object
+            const artifact = {
+                name: name,
+                description: description,
+                quality: quality,
+                type: type,
+                visual: visual
+            };
+        
+            // Add the artifact card to the list
+            addArtifactCard(artifact);
+        
+            // Optional: Clear the form fields after adding
+            document.getElementById('modForm').reset();
         });
       
       // Call loadConfiguration when the page loads
