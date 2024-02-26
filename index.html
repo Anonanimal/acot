@@ -75,52 +75,84 @@
         #modForm label[for="visuals"][style*="display: none;"] {
             display: none !important;
         }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: flex-start; /* Align children to the start of the container */
+            align-items: flex-start; /* Align items to the top */
+            gap: 20px; /* Add some space between the form and the cards */
+        }
+        
+        .form-container {
+            /* Your existing styles, without the margin auto */
+            margin: 20px 20px 20px 0; /* Adjusted margin */
+        }
+        
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow cards to wrap to the next line */
+            gap: 10px; /* Space between cards */
+            max-width: calc(100% - 620px); /* Adjust based on the form width and gap */
+        }
+        
+        .card {
+            width: 200px; /* Fixed card width */
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
     <h1>CK3 Artifact Creator</h1>
-    <form id="modForm">
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name">
+    <div class="content-wrapper">
+        <form id="modForm">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+            <div>
+                <label for="quality">Quality:</label>
+                <select id="quality" name="quality">
+                </select>
+            </div>
+            <div>
+                <label for="baseTemplate">Template:</label>
+                <select id="baseTemplate" name="baseTemplate">
+                    <option value="none">None</option>
+                </select>
+            </div>
+            <div>
+                <label for="artifactCategory">Artifact Category:</label>
+                <select id="artifactCategory" name="artifactCategory">
+                    <option value="character">Character Artifact</option>
+                    <option value="court">Courtroom Artifact</option>
+                </select>
+            </div>
+            <div id="typeContainer" style="display: none;">
+                <label for="type">Type:</label>
+                <select id="type" name="type">
+                    <!-- Options will be populated based on category selection -->
+                </select>
+            </div>
+            <div id="visualsContainer" style="display: none;">
+                <label for="visuals">Visuals:</label>
+                <select id="visuals" name="visuals">
+                    <!-- Options will be populated based on type selection -->
+                </select>
+            </div>
+            <button type="button" onclick="generateCode()">Generate Code</button>
+        </form>
+        <div class="cards-container">
+            <!-- Placeholder for dynamically added cards -->
         </div>
-        <div>
-            <label for="description">Description:</label>
-            <textarea id="description" name="description"></textarea>
-        </div>
-        <div>
-            <label for="quality">Quality:</label>
-            <select id="quality" name="quality">
-            </select>
-        </div>
-        <div>
-            <label for="baseTemplate">Template:</label>
-            <select id="baseTemplate" name="baseTemplate">
-                <option value="none">None</option>
-            </select>
-        </div>
-        <div>
-            <label for="artifactCategory">Artifact Category:</label>
-            <select id="artifactCategory" name="artifactCategory">
-                <option value="character">Character Artifact</option>
-                <option value="court">Courtroom Artifact</option>
-            </select>
-        </div>
-        <div id="typeContainer" style="display: none;">
-            <label for="type">Type:</label>
-            <select id="type" name="type">
-                <!-- Options will be populated based on category selection -->
-            </select>
-        </div>
-        <div id="visualsContainer" style="display: none;">
-            <label for="visuals">Visuals:</label>
-            <select id="visuals" name="visuals">
-                <!-- Options will be populated based on type selection -->
-            </select>
-        </div>
-        <button type="button" onclick="generateCode()">Generate Code</button>
-    </form>
-
+    </div>
     <textarea id="gameCode" rows="10" cols="50" class="gamecode" readonly></textarea>
 
     <script>
@@ -171,7 +203,27 @@
             document.getElementById('gameCode').value = codeString;
         }
 
+        function addArtifactCard(artifact) {
+            const container = document.querySelector('.cards-container');
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${artifact.name}</h3>
+                <p>${artifact.description}</p>
+                <!-- Add more artifact details here -->
+            `;
+            container.appendChild(card);
+        }
+
         generateGameCode();
+
+        const newArtifact = {
+            name: "Ancient Sword",
+            description: "A legendary sword of immense power."
+            // Include other properties as needed
+        };
+        
+        addArtifactCard(newArtifact);
 
         document.getElementById('gameCode').addEventListener('click', function(event) {
             // Prevent default action to ensure the textarea gets selected
