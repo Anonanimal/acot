@@ -367,7 +367,7 @@
                 if (!currentInput) return;
         
                 // Filter and display suggestions
-                const filteredSuggestions = allSuggestions.filter(suggestion =>
+                var filteredSuggestions = allSuggestions.filter(suggestion =>
                     suggestion.toLowerCase().startsWith(currentInput.toLowerCase())
                 );
 
