@@ -159,6 +159,22 @@
             border: none;
             cursor: pointer;
         }
+
+        .autocomplete-suggestions {
+            border: 1px solid #ccc;
+            background: white;
+            position: absolute;
+            z-index: 1000;
+        }
+        
+        .autocomplete-suggestions div {
+            padding: 5px;
+            cursor: pointer;
+        }
+        
+        .autocomplete-suggestions div:hover {
+            background-color: #eee;
+        }
     </style>
 </head>
 <body>
@@ -327,11 +343,46 @@
             container.appendChild(card);
         }
 
-        // Array of modifier names for the autocomplete
-        const modifierNames = ["Speed", "Strength", "Agility", "Wisdom"];
+        function autocomplete(input, allSuggestions) {
+            input.addEventListener('input', function() {
+                const currentInput = this.value;
+        
+                // Clear previous suggestions
+                let existingSuggestions = document.querySelector('.autocomplete-suggestions');
+                if (existingSuggestions) {
+                    existingSuggestions.remove();
+                }
+        
+                if (!currentInput) return;
+        
+                // Filter suggestions
+                const filteredSuggestions = allSuggestions.filter(suggestion =>
+                    suggestion.toLowerCase().startsWith(currentInput.toLowerCase())
+                );
+        
+                if (filteredSuggestions.length === 0) return;
+        
+                // Create suggestions container
+                const suggestionsContainer = document.createElement('div');
+                suggestionsContainer.className = 'autocomplete-suggestions';
+        
+                filteredSuggestions.forEach(suggestion => {
+                    const suggestionElement = document.createElement('div');
+                    suggestionElement.textContent = suggestion;
+                    suggestionElement.addEventListener('click', function() {
+                        input.value = suggestion;
+                        suggestionsContainer.remove();
+                    });
+                    suggestionsContainer.appendChild(suggestionElement);
+                });
+        
+                input.parentNode.appendChild(suggestionsContainer);
+            });
+        }
         
         // Function to add a new modifier input field
         function addModifierInput() {
+            var mods = ["Speed", "Strength", "Agility", "Wisdom"];
             const container = document.getElementById('modifiersList');
             const inputGroup = document.createElement('div');
             inputGroup.className = 'modifier-input-group';
@@ -341,17 +392,20 @@
                 <input type="number" class="modifier-value" placeholder="Value" step="0.01">
                 <button type="button" class="remove-modifier">Remove</button>
             `;
-        
-            // Initialize autocomplete/typeahead for the modifier name input
-            // If using jQuery UI Autocomplete, it would look something like this:
-            // $(inputGroup).find('.modifier-name').autocomplete({ source: modifierNames });
-        
+    
             // Add event listener for the remove button
             inputGroup.querySelector('.remove-modifier').addEventListener('click', function() {
                 inputGroup.remove();
             });
         
             container.appendChild(inputGroup);
+
+            const modifierNameInput = inputGroup.querySelector('.modifier-name');
+            autocomplete(modifierNameInput, mods); // Assume `modifierNames` is your array of suggestions
+        
+            inputGroup.querySelector('.remove-modifier').addEventListener('click', function() {
+                inputGroup.remove();
+            });
         }
 
         function collectModifiers() {
