@@ -230,8 +230,29 @@
             const container = document.querySelector('.cards-container');
             const card = document.createElement('div');
             card.className = 'card';
+            
+            // Determine the color based on the artifact's quality
+            let color;
+            switch (artifact.quality) {
+                case "common":
+                    color = "brown";
+                    break;
+                case "masterwork":
+                    color = "green";
+                    break;
+                case "famed":
+                    color = "blue";
+                    break;
+                case "illustrious":
+                    color = "purple";
+                    break;
+                default:
+                    color = "black"; // Default color if no match
+            }
+        
+            // Use the color in the style for the artifact's name
             card.innerHTML = `
-                <h3>${artifact.name}</h3>
+                <h3 style="color: ${color};">${artifact.name}</h3>
                 <p><strong>Type:</strong> ${artifact.type}</p>
                 <p><strong>Visual:</strong> ${artifact.visual}</p>
                 <p>${artifact.description}</p>
@@ -240,12 +261,13 @@
         }
 
         generateGameCode();
-
+        
         const newArtifact = {
-            name: "Ancient Sword",
-            description: "A legendary sword of immense power, glowing with an ethereal light.",
-            type: "Weapon",
-            visual: "Glowing Blade"
+            name: "Ethereal Bow",
+            description: "A bow carved from dragonbone, capable of shooting arrows of pure light.",
+            type: "Ranged Weapon",
+            visual: "Luminescent String",
+            quality: "illustrious" // This will color the name purple
         };
 
         addArtifactCard(newArtifact);
