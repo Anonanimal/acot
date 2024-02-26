@@ -226,7 +226,7 @@
                 </div>
                 <button type="button" id="addModifier">Add Modifier</button>
             </div>
-            <button type="button" id="generateCodeButton">Add Card</button>
+            <button type="button" id="generateCodeButton">Create Artifact</button>
         </form>
         <div class="cards-container">
             <!-- Placeholder for dynamically added cards -->
@@ -324,7 +324,15 @@
             var type = toTitleCase(artifact.type.replaceAll("_", " "));
             var visual = toTitleCase(artifact.visual.replaceAll("_", " "));
             
-            // Adding a delete button to the card
+           // Initialize modifiers HTML content
+            let modifiersContent = '';
+            if (artifact.modifiers && artifact.modifiers.length > 0) {
+                modifiersContent = artifact.modifiers.map(modifier => 
+                    `<p><strong>${toTitleCase(modifier.name.replaceAll("_", " "))}:</strong> ${modifier.value}</p>`
+                ).join('');
+            }
+            
+            // Adding a delete button to the card and including modifiers in the innerHTML
             card.innerHTML = `
                 <div style="position: relative;">
                     <button class="delete-button" style="position: absolute; top: 0; right: 0;">X</button>
@@ -333,8 +341,9 @@
                 <p><strong>Type:</strong> ${type}</p>
                 <p><strong>Visual:</strong> ${visual}</p>
                 <p>${artifact.description}</p>
+                ${modifiersContent} <!-- Add the modifiers content here -->
             `;
-        
+
             // Add event listener to the delete button
             card.querySelector('.delete-button').addEventListener('click', function() {
                 // Ask for confirmation
