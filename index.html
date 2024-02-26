@@ -454,8 +454,8 @@
             const modifiers = [];
             document.querySelectorAll('.modifier-input-group').forEach(group => {
                 const name = group.querySelector('.modifier-name').value;
-                const value = group.querySelector('.modifier-value').valueAsNumber; // Use valueAsNumber for numeric inputs
-                if (name && !isNaN(value)) { // Check if both name and value are provided
+                const value = group.querySelector('.modifier-value').value; // Use valueAsNumber for numeric inputs
+                if (name && value) { // Check if both name and value are provided
                     modifiers.push({name, value});
                 }
             });
