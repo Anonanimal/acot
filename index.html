@@ -344,42 +344,68 @@
         }
 
         function autocomplete(input, allSuggestions) {
+            let timeoutId = null;
+        
             input.addEventListener('input', function() {
                 const currentInput = this.value;
         
-                // Clear previous suggestions
-                let existingSuggestions = input.parentNode.querySelector('.autocomplete-suggestions');
-                if (existingSuggestions) {
-                    existingSuggestions.remove();
-                }
+                // Clear previous suggestions immediately
+                clearSuggestions();
         
                 if (!currentInput) return;
         
-                // Filter suggestions
+                // Filter and display suggestions
                 const filteredSuggestions = allSuggestions.filter(suggestion =>
                     suggestion.toLowerCase().startsWith(currentInput.toLowerCase())
                 );
         
-                if (filteredSuggestions.length === 0) return;
+                displaySuggestions(filteredSuggestions, this);
+            });
         
-                // Create suggestions container
+            input.addEventListener('blur', function() {
+                // Set a timeout to hide the suggestions, allowing clicks to be registered
+                timeoutId = setTimeout(clearSuggestions, 200); // 200ms delay
+            });
+        
+            input.addEventListener('focus', function() {
+                // If focusing again, clear any pending hide action
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+                // Show suggestions again if there's text
+                if (input.value) {
+                    input.dispatchEvent(new Event('input'));
+                }
+            });
+        
+            function clearSuggestions() {
+                let existingSuggestions = input.parentNode.querySelector('.autocomplete-suggestions');
+                if (existingSuggestions) {
+                    existingSuggestions.remove();
+                }
+            }
+        
+            function displaySuggestions(suggestions, inputField) {
+                if (suggestions.length === 0) return;
+        
                 const suggestionsContainer = document.createElement('div');
                 suggestionsContainer.className = 'autocomplete-suggestions';
         
-                filteredSuggestions.forEach(suggestion => {
+                suggestions.forEach(suggestion => {
                     const suggestionElement = document.createElement('div');
                     suggestionElement.textContent = suggestion;
                     suggestionElement.addEventListener('click', function() {
-                        input.value = suggestion;
-                        suggestionsContainer.remove();
+                        inputField.value = suggestion;
+                        clearSuggestions();
                     });
                     suggestionsContainer.appendChild(suggestionElement);
                 });
         
                 // Insert the suggestions container right after the input field
-                input.parentNode.insertBefore(suggestionsContainer, input.nextSibling);
-            });
+                inputField.parentNode.insertBefore(suggestionsContainer, inputField.nextSibling);
+            }
         }
+
         
         // Function to add a new modifier input field
         function addModifierInput() {
