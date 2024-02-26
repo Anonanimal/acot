@@ -112,6 +112,20 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+        .card h3 {
+            margin-top: 0;
+            color: #007bff; /* Example color */
+        }
+        
+        .card p {
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+        
+        .card strong {
+            color: #333; /* Slightly darker color for emphasis */
+        }
     </style>
 </head>
 <body>
@@ -218,8 +232,9 @@
             card.className = 'card';
             card.innerHTML = `
                 <h3>${artifact.name}</h3>
+                <p><strong>Type:</strong> ${artifact.type}</p>
+                <p><strong>Visual:</strong> ${artifact.visual}</p>
                 <p>${artifact.description}</p>
-                <!-- Add more artifact details here -->
             `;
             container.appendChild(card);
         }
@@ -228,10 +243,11 @@
 
         const newArtifact = {
             name: "Ancient Sword",
-            description: "A legendary sword of immense power."
-            // Include other properties as needed
+            description: "A legendary sword of immense power, glowing with an ethereal light.",
+            type: "Weapon",
+            visual: "Glowing Blade"
         };
-        
+
         addArtifactCard(newArtifact);
 
         document.getElementById('gameCode').addEventListener('click', function(event) {
